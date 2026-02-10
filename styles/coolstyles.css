@@ -101,7 +101,10 @@ footer p{
 /******************************************
 		Animations
 ******************************************/
-
+.shapes .shape1:nth-child(3){
+	/* nth child (3) targets the third child - or specifically the thing with t hte class .shape1 that is a third child in .shapes */
+	transform: scale(2);
+}
 
 
 
