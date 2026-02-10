@@ -102,8 +102,12 @@ footer p{
 		Animations
 ******************************************/
 .shapes .shape1:nth-child(3){
+/* you can animate any change in an element using the transition property */
+	transition: transform 1s ease-in-out;
+}
+.shapes .shape1:nth-child(3):hover{
 	/* nth child (3) targets the third child - or specifically the thing with t hte class .shape1 that is a third child in .shapes */
-	transform: scale(2);
+	transform: scale(2, 1.5);
 }
 
 
