@@ -109,9 +109,47 @@ footer p{
 	/* nth child (3) targets the third child - or specifically the thing with t hte class .shape1 that is a third child in .shapes */
 	transform: scale(2, 1.5);
 }
+.shapes .shape1:nth-child(2){
+	/* if you want any change to animate, use transition:all */
+	transition: all 750ms ease-in-out;
+}
+	
 
+.shapes .shape1:nth-child(2):hover{
+	transform: rotate(135deg);
+	transform: translate(50px,20px);
+	background-color: blueviolet;
 
+}
 
+/******************************************
+		Animations
+******************************************/
+/* define an animation using @keyframs */
+@keyframes jump{
+	50%{
+		transform: translateY(-100px);
+	}
+}
+ @keyframes pendulum{
+	/*  you can set a property for the duration of the animation */
+	0%, 100%{
+		/* when dealing with direction a negative verticle value means up, a positive horizontal clue meanas left, a positive value means right, if using 3d transitions... positive value means toward viewer, negative means away  */
+		transform-origin:0 -100px;
+	}
+	0%{
+		transform: rotate(77deg);
+	}
+	100%{
+		transform: rotate(-45deg);
+	}
+ }
+.shapes .shape1:nth-child(4){
+	animation: jump 2s ease-in-out infinite;
+}
+.shapes .shape1:nth-child(5){
+	animation: pendulum 5s ease-in-out infinite alternate;
+}
 /******************************************
 		Slider
 ******************************************/
@@ -122,10 +160,84 @@ footer p{
 	width:80%;
 	/* text-align will center images as well as text */
 	text-align:center;
+	overflow:hidden;
 }
 
+/* first, make the slider positon relative so it will contain all the absolutely positoned images */
+.slideback{
+	position: relative;
+}
 
+.slideback > img{
+	/* > is the direct chiold selector , and only targets elements that are children but not grandchildren or further descendants */
+	width: 100%;
+}
 
+.slideholder{
+	/* this is trhe element that slides back and forth */
+	position: absolute;
+	/* position:absolute is relative to the last element with a position property */
+	top:0;
+	width: 300%; /* because there are three images*/
+	height: 100%; /*meow */
+	display: flex;
+	transition: margin 1s ease-in-out;
+}
+
+.imgslide{
+	/* these divs hold each of the images, an dwe can use flex-grow to make them take up more space */
+	flex-grow: 1;
+	height: 100%;
+}
+.imgslide img{
+	margin-top:26%;
+	width: 26%;
+
+}
+#slide1:checked ~ .slideback .slideholder
+{margin-left:0;}
+#slide2:checked ~ .slideback .slideholder{margin-left:-100%;}
+#slide3:checked ~ .slideback .slideholder{margin-left:-200%;}
 /******************************************
 		Labels (buttons)
 ******************************************/
+/**
+        Labels (buttons)
+**/
+label{
+    display: inline-block;
+    /* inline-block is like images, where they can have width and hieght,
+    margins and padding, but will sit next to each other */
+
+    background-color: hsl(101,100%,80%);
+    /* hsl is hue, saturation, luminosity hue is the colour
+        wheel saturation is how much colour luminosity is how much light or dadrk colour is */
+    border: 2px solid hsl(101,100%,30%);
+        /* using hsl for the border, and keeping the hue the same,
+            we can get darker version of the same green */
+    border-radius: 10px;
+    width: 100px;
+    padding: 5px 0; /* two values mean top bottom, left right*/
+    font-size: 24px;
+    text-align: center;
+    margin: 0 15px;
+	/* change the cursor when the user is hovering */
+    cursor: pointer;
+	transition: background 0.5s, transform 0.15s;
+}
+
+label:hover{
+	background-color:hsl(101,100%,40%);
+	
+}
+label:active{
+	background-color:hsl(101,100%,40%);
+	transform:scale(0.9);
+}
+#slide1:checked ~ label:nth-of-type(1){background-color: hsl(101, 100%, 50%);}
+#slide2:checked ~ label:nth-of-type(2){background-color: hsl(101, 100%, 50%);}
+#slide3:checked ~ label:nth-of-type(3){background-color: hsl(101, 100%, 50%);}
+
+input[type=radio]{
+	display:none;
+}
